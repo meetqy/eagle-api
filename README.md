@@ -37,3 +37,7 @@ npm start
 ![](./readme/5.png)
 
 > 难点：json-server远程不支持监听文件改动，暂无解决方案，如果有想法的小伙伴欢迎一起沟通
+
+## 链接
+
+* [Eagle]https://docs-cn.eagle.cool/
