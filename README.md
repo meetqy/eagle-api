@@ -1,6 +1,6 @@
 # EagleApi
 
-让你的eagle拥有reset-api能力,基于json-server。
+让你的eagle拥有api查询能力,基于json-server。
 
 ## 介绍
 
