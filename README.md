@@ -21,9 +21,33 @@
 ``` sh
 git clone https://github.com/meetqy/eagle-api
 cd eagle-api
+```
+
+### 配置
+
+将 .env.example 改为 .env
+
+```shell
+# eagle library地址 绝对路径
+library_dir=xxx.library
+
+# 是否json-server路由展开
+is_expand=0
+
+# 端口号
+port=3000
+
+# 是否将json中的value转换为字符串
+is_value_to_json=0
+```
+
+### 启动
+
+```
 npm i 
 npm start
 ```
+
 
 ## 待实现功能
 
