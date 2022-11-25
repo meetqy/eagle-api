@@ -124,7 +124,8 @@ function watcherImages() {
 
         // change
         const change = eagleApiData.change[today];
-        if (!change.length) {
+        const index = change.findIndex((item) => item.id === id);
+        if (!change.length || index === -1) {
           change.push(json);
         } else {
           change.splice(
