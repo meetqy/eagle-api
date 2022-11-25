@@ -1,14 +1,16 @@
 {
   "name": "eagle-api",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "eagle"
+  ],
+  "author": "meetqy",
+  "license": "MIT",
   "dependencies": {
     "chokidar": "^3.5.3",
     "dotenv": "^16.0.3",
