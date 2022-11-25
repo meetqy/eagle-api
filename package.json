@@ -1,0 +1,19 @@
+{
+  "name": "eagle-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "dotenv": "^16.0.3",
+    "fs-extra": "^10.1.0",
+    "json-server": "^0.17.1",
+    "supervisor": "^0.12.0"
+  }
+}
