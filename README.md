@@ -40,4 +40,4 @@ npm start
 
 ## 链接
 
-* [Eagle](https://docs-cn.eagle.cool/)
+* [Eagle](https://cn.eagle.cool/)
