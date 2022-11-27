@@ -14,6 +14,7 @@ const isValueToJson = +is_value_to_json;
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
 const imagesFile = path.join(dir, "./images.json");
+const imagesCacheFile = path.join(dir, "./images.cache.json");
 const changeFile = path.join(dir, "./change");
 const addFile = path.join(dir, "./add");
 
@@ -34,6 +35,16 @@ const eagleApiData = {
     // "2022-11-25": [{}]
   },
 };
+
+// 所有图片id索引
+const imagesCache = fs.readJSONSync(imagesCacheFile, { throws: false }) || {};
+if (!Object.keys(imagesCache).length) {
+  eagleApiData.images.forEach((item) => {
+    imagesCache[item.id] = item.lastModified;
+  });
+
+  fs.writeJSONSync(imagesCacheFile, imagesCache);
+}
 
 // 初始化
 fs.ensureDirSync(changeFile);
@@ -97,6 +108,9 @@ function watcherImages() {
         const json = handleJsonValueToString(fs.readJSONSync(_path));
         if (!images.find((item) => item.id === json.id)) {
           images.push(json);
+
+          imagesCache[json.id] = json.lastModified;
+          fs.writeJSONSync(imagesCacheFile, imagesCache);
           fs.writeJsonSync(imagesFile, images);
 
           if (!isInit) {
