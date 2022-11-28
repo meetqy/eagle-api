@@ -14,7 +14,6 @@ const isValueToJson = +is_value_to_json;
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
 const imagesFile = path.join(dir, "./images.json");
-const imagesCacheFile = path.join(dir, "./images.cache.json");
 const changeFile = path.join(dir, "./change");
 const addFile = path.join(dir, "./add");
 
@@ -36,14 +35,12 @@ const eagleApiData = {
   },
 };
 
-// 所有图片id索引
-const imagesCache = fs.readJSONSync(imagesCacheFile, { throws: false }) || {};
-if (!Object.keys(imagesCache).length) {
+// 索引
+const imageCache = {};
+if (eagleApiData.images.length > 0) {
   eagleApiData.images.forEach((item) => {
-    imagesCache[item.id] = item.lastModified;
+    imageCache[item.id] = item.mtime;
   });
-
-  fs.writeJSONSync(imagesCacheFile, imagesCache);
 }
 
 // 初始化
@@ -106,12 +103,9 @@ function watcherImages() {
     return watcher
       .on("add", async (_path) => {
         const json = handleJsonValueToString(fs.readJSONSync(_path));
-        if (!images.find((item) => item.id === json.id)) {
+        if (!imageCache[json.id]) {
           images.push(json);
-
-          imagesCache[json.id] = json.lastModified;
-          fs.writeJSONSync(imagesCacheFile, imagesCache);
-          fs.writeJsonSync(imagesFile, images);
+          imageCache[json.id] = json.mtime;
 
           if (!isInit) {
             // add
@@ -120,6 +114,7 @@ function watcherImages() {
               path.join(addFile, `./${today}.json`),
               eagleApiData.add[today]
             );
+            fs.writeJSONSync(imagesFile, images);
           }
         }
       })
@@ -157,7 +152,11 @@ function watcherImages() {
       .on("ready", () => {
         clearInterval(timer);
         console.log(`【images】初始化成功，开始监听...`);
-        isInit = false;
+        if (isInit) {
+          fs.writeJsonSync(imagesFile, images);
+          isInit = false;
+        }
+
         resolve();
       });
   });
