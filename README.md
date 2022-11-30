@@ -8,9 +8,13 @@
 
 ![example](./readme/1.png)
 
-**数据分页展示**
+**数据查询能力**
 
 ![images paging](./readme/2.png)
+
+**读取静态资源**
+
+![images static](./readme/6.png)
 
 **图片库中新增的文件**
 
