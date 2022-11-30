@@ -12,7 +12,7 @@ const isExpand = +is_expand;
 const isValueToJson = +is_value_to_json;
 
 const server = jsonServer.create();
-const middlewares = jsonServer.defaults();
+
 const imagesFile = path.join(dir, "./images.json");
 const changeFile = path.join(dir, "./change");
 const addFile = path.join(dir, "./add");
@@ -23,6 +23,7 @@ let isInit = true;
 const eagleApiData = {
   tags: {},
   metadata: {},
+  // 全部 + 回收站 = images
   images:
     fs.readJSONSync(imagesFile, {
       throws: false,
@@ -167,6 +168,7 @@ function watcherImages() {
   await watcherNormal("metadata");
   await watcherImages();
 
+  const middlewares = jsonServer.defaults();
   const { images, tags, metadata } = eagleApiData;
 
   const eagleApiDataTemp = isExpand
@@ -183,6 +185,11 @@ function watcherImages() {
   }
 
   server.use(middlewares);
+
+  server.use("/static", (req, res) => {
+    const data = fs.readFileSync(path.join(dir, "/images", req.path));
+    res.end(data);
+  });
 
   const router = jsonServer.router(eagleApiDataTemp);
 

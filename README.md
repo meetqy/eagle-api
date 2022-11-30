@@ -48,10 +48,47 @@ npm i
 npm start
 ```
 
+## API简略说明
+
+**该api只具备查询功能，如需要修改添加等功能可使用官方api**
+
+### images
+
+``` sh
+# 获取全部图片信息，数据量过大可能卡顿
+/images
+
+# 按key获取
+/images?height=1920
+
+# 分页
+/images?_page=1&_limit=20
+
+# key获取 + 分页
+/images?height=1920&_page=1&_limit=20
+```
+
+> 更多查询功能可查看 [json-server#routes](https://github.com/typicode/json-server#routes)
+
+### 其他
+
+``` sh
+# 获取修改的图片信息 以天为单位
+/change
+
+# 获取添加的图片信息 一天为单位
+/add
+
+# 获取metadata
+/metadata
+
+# 获取标签信息
+/tags
+```
 
 ## 待实现功能
 
-- [ ] 关联本地静态文件，可访问图片
+- [x] 关联本地静态文件，可访问图片
 
 ## 奇淫技巧
 
