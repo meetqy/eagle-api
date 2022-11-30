@@ -84,6 +84,10 @@ npm start
 
 # 获取标签信息
 /tags
+
+# 获取静态资源 
+/static/filename.info/filename.jpg
+# eg: /static/LB0DG6W3X57HC.info/a05013.jpg
 ```
 
 ## 待实现功能
