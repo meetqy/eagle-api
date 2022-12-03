@@ -103,8 +103,12 @@ function watcherImages() {
   return new Promise((resolve) => {
     return watcher
       .on("add", async (_path) => {
-        const json = handleJsonValueToString(fs.readJSONSync(_path));
-        if (!imageCache[json.id]) {
+        const id = _path
+          .match(/\/(\d|[a-zA-Z])+.info/)[0]
+          .split(".")[0]
+          .replace("/", "");
+        if (!imageCache[id]) {
+          const json = handleJsonValueToString(fs.readJSONSync(_path));
           images.push(json);
           imageCache[json.id] = json.mtime;
 
