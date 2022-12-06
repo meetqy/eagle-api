@@ -1,4 +1,5 @@
 const jsonServer = require("json-server");
+const express = require("express");
 const chokidar = require("chokidar");
 const fs = require("fs-extra");
 const path = require("path");
@@ -7,11 +8,17 @@ require("dotenv").config();
 const today = new Date().toISOString().split("T")[0];
 
 // eagle library
-const { library_dir: dir, is_expand, port, is_value_to_json } = process.env;
+const {
+  library_dir: dir,
+  is_expand,
+  port,
+  is_value_to_json,
+  image_cache,
+} = process.env;
 const isExpand = +is_expand;
 const isValueToJson = +is_value_to_json;
 
-const server = jsonServer.create();
+const server = express();
 
 const imagesFile = path.join(dir, "./images.json");
 const changeFile = path.join(dir, "./change");
@@ -190,10 +197,12 @@ function watcherImages() {
 
   server.use(middlewares);
 
-  server.use("/static", (req, res) => {
-    const data = fs.readFileSync(path.join(dir, "/images", req.path));
-    res.end(data);
-  });
+  server.use(
+    "/static",
+    express.static(path.join(dir, "/images"), {
+      maxAge: image_cache || 86400000 * 365,
+    })
+  );
 
   const router = jsonServer.router(eagleApiDataTemp);
 

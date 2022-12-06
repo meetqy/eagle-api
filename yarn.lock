@@ -271,7 +271,7 @@ express-urlrewrite@^1.4.0:
     debug "*"
     path-to-regexp "^1.0.3"
 
-express@^4.17.1:
+express@^4.17.1, express@^4.18.2:
   version "4.18.2"
   resolved "https://registry.npmjs.org/express/-/express-4.18.2.tgz#3fabe08296e930c796c19e3c516979386ba9fd59"
   integrity sha512-5/PsL6iGPdfQ/lKM1UuielYgv3BUoJfz1aUwU9vHZ+J7gyvwdQXFEBIEIaxeGf0GIcreATNyBExtalisDbuMqQ==
