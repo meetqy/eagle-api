@@ -1,4 +1,4 @@
-const jsonServer = require("json-server");
+const jsonServer = require("./json-server/lib/server");
 const express = require("express");
 const chokidar = require("chokidar");
 const fs = require("fs-extra");
@@ -195,7 +195,34 @@ function watcherImages() {
     delete eagleApiDataTemp.applicationVersion;
   }
 
+  const router = jsonServer.router(eagleApiDataTemp);
+
   server.use(middlewares);
+
+  // // 自定义 router.render 开始 >>>
+  // router.render = (req, res) => {
+  //   const { query } = require("url").parse(req.originalUrl, true);
+  //   const { _page, _limit } = query;
+  //   const tags_is_null = req.originalUrl.includes("tags_is_null");
+
+  //   if (tags_is_null) {
+  //     const db = router.db;
+  //     let chain = db.get("images");
+  //     chain = chain.filter((item) => !item.tags || !item.tags.length);
+  //     const page = require("json-server/lib/server/utils").getPage(
+  //       chain.value(),
+  //       _page,
+  //       _limit
+  //     );
+
+  //     res.locals.data = page.items;
+  //     res.setHeader("X-Total-Count", chain.size());
+  //   }
+
+  //   res.send(res.locals.data);
+  // };
+
+  // // 自定义 router.render 结束 >>>
 
   server.use(
     "/static",
@@ -203,8 +230,6 @@ function watcherImages() {
       maxAge: image_cache || 86400000 * 365,
     })
   );
-
-  const router = jsonServer.router(eagleApiDataTemp);
 
   server.use(router);
 

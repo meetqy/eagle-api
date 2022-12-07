@@ -1,10 +1,10 @@
 # EagleApi
 
-让你的eagle拥有api查询能力,基于json-server。
+让你的 eagle 拥有 api 查询能力,基于 json-server。
 
 ## 介绍
 
-如果你也想把eagle作为一个本地管理系统，每次修改文件，都能动态更新路由，你可以试试它。
+如果你也想把 eagle 作为一个本地管理系统，每次修改文件，都能动态更新路由，你可以试试它。
 
 ![example](./readme/1.png)
 
@@ -22,7 +22,7 @@
 
 ## 安装
 
-``` sh
+```sh
 git clone https://github.com/meetqy/eagle-api
 cd eagle-api
 ```
@@ -48,17 +48,25 @@ is_value_to_json=0
 ### 启动
 
 ```
-npm i 
+npm i
 npm start
 ```
 
-## API简略说明
+## API 说明
 
-**该api只具备查询功能，如需要修改添加等功能可使用官方api**
+**该 api 只具备查询功能，如需要修改添加等功能可使用 eagle 官方 api**
+
+### 自定义 filter
+
+在 `json-server` 基础上，针对本项目新增的查询
+
+| 参数    | 说明            | 用法                                  | 场景         |
+| ------- | --------------- | ------------------------------------- | ------------ |
+| `_null` | 字段是否为 null | `/images?tags_null&_page=1&_limit=20` | 未标签的图片 |
 
 ### images
 
-``` sh
+```sh
 # 获取全部图片信息，数据量过大可能卡顿
 /images
 
@@ -76,7 +84,7 @@ npm start
 
 ### 其他
 
-``` sh
+```sh
 # 获取修改的图片信息 以天为单位
 /change
 
@@ -89,7 +97,7 @@ npm start
 # 获取标签信息
 /tags
 
-# 获取静态资源 
+# 获取静态资源
 /static/filename.info/filename.jpg
 # eg: /static/LB0DG6W3X57HC.info/a05013.jpg
 ```
@@ -100,14 +108,14 @@ npm start
 
 ## 奇淫技巧
 
-利用腾讯对象存储官方工具，自动同步图片库，在用json-server托管远程文件轻松实现将eagle在线化。
+利用腾讯对象存储官方工具，自动同步图片库，在用 json-server 托管远程文件轻松实现将 eagle 在线化。
 
 ![](./readme/4.png)
 ![](./readme/5.png)
 
-> 难点：json-server远程不支持监听文件改动，暂无解决方案，如果有想法的小伙伴欢迎一起沟通
+> 难点：json-server 远程不支持监听文件改动，暂无解决方案，如果有想法的小伙伴欢迎一起沟通
 
 ## 链接
 
-* [Eagle](https://cn.eagle.cool/)
-* [官方创建API](https://www.yuque.com/augus-gsjgn/eagle-api)
+- [Eagle](https://cn.eagle.cool/)
+- [官方创建 API](https://www.yuque.com/augus-gsjgn/eagle-api)
