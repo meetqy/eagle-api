@@ -1,10 +1,13 @@
 # EagleApi
 
-让你的 eagle 拥有 api 查询能力,基于 json-server。
+让你的 eagle 拥有 api 查询能力，基于 json-server。
 
-## 为什么不直接使用官方 API？
+> 官方 API 依赖于客户端，无法直接在服务器中部署。
 
-官方 API 提供了本工具所有查询功能，并且还有增删改等功能。但都基于 eagle 客户端，无法直接在服务器中部署。
+## 在线体验
+
+- API [json-server.rao.pics](https://json-server.rao.pics)
+- WEB [rao.pics](https://rao.pics)
 
 ## 介绍
 
