@@ -2,6 +2,10 @@
 
 让你的 eagle 拥有 api 查询能力,基于 json-server。
 
+## 为什么不直接使用官方 API？
+
+官方 API 提供了本工具所有查询功能，并且还有增删改等功能。但都基于 eagle 客户端，无法直接在服务器中部署。
+
 ## 介绍
 
 如果你也想把 eagle 作为一个本地管理系统，每次修改文件，都能动态更新路由，你可以试试它。
@@ -118,4 +122,4 @@ npm start
 ## 链接
 
 - [Eagle](https://cn.eagle.cool/)
-- [官方创建 API](https://www.yuque.com/augus-gsjgn/eagle-api)
+- [官方创建 API](https://api.eagle.cool/)
