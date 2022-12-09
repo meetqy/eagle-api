@@ -61,8 +61,6 @@ npm start
 
 ## API 说明
 
-**该 api 只具备查询功能，如需要修改添加等功能可使用 eagle 官方 api**
-
 ### 自定义 filter
 
 在 `json-server` 基础上，针对本项目新增的查询
