@@ -63,6 +63,7 @@ eagleApiData.add[today] =
   fs.readJsonSync(path.join(addFile, `./${today}.json`), { throws: false }) ||
   [];
 
+// 监听除了images以外的文件
 function watcherNormal(filename) {
   const watcher = chokidar.watch(path.join(dir, `./${filename}.json`));
 
@@ -81,6 +82,7 @@ function watcherNormal(filename) {
   });
 }
 
+// 监听images
 function watcherImages() {
   const images = eagleApiData.images;
 
@@ -160,6 +162,15 @@ function watcherImages() {
 
         fs.writeJSONSync(imagesFile, images);
         eagleApiData.images = images;
+      })
+      .on("unlink", (_path) => {
+        const id = _path
+          .match(/\/(\d|[a-zA-Z])+.info/)[0]
+          .split(".")[0]
+          .replace("/", "");
+        const index = eagleApiData.images.findIndex((item) => item.id === id);
+        images.splice(index, 1);
+        delete imageCache[id];
       })
       .on("ready", () => {
         clearInterval(timer);
