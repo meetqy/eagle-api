@@ -3,20 +3,14 @@ const express = require("express");
 const chokidar = require("chokidar");
 const fs = require("fs-extra");
 const path = require("path");
-require("dotenv").config();
+require("dotenv").config({
+  path: "./.env.development",
+});
 
 const today = new Date().toISOString().split("T")[0];
 
 // eagle library
-const {
-  library_dir: dir,
-  is_expand,
-  port,
-  is_value_to_json,
-  image_cache,
-} = process.env;
-const isExpand = +is_expand;
-const isValueToJson = +is_value_to_json;
+const { library_dir: dir, port } = process.env;
 
 const server = express();
 
@@ -191,29 +185,15 @@ function watcherImages() {
   await watcherImages();
 
   const middlewares = jsonServer.defaults();
-  const { images, tags, metadata } = eagleApiData;
 
-  const eagleApiDataTemp = isExpand
-    ? {
-        images,
-        ...tags,
-        ...metadata,
-      }
-    : eagleApiData;
-
-  if (isExpand) {
-    delete eagleApiDataTemp.modificationTime;
-    delete eagleApiDataTemp.applicationVersion;
-  }
-
-  const router = jsonServer.router(eagleApiDataTemp);
+  const router = jsonServer.router(eagleApiData);
 
   server.use(middlewares);
 
   server.use(
     "/static",
     express.static(path.join(dir, "/images"), {
-      maxAge: image_cache || 86400000 * 365,
+      maxAge: 86400000 * 365,
     })
   );
 
